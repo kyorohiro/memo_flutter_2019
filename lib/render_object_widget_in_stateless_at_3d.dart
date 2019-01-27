@@ -50,49 +50,10 @@ class MyHomePage extends ma.StatelessWidget {
 ma.Widget createBody(ma.BuildContext context) {
 //  return  DrawRectWidget();
   return ma.Row(children: <ma.Widget>[
-    DrawRectWidget(),
     ma.Text("Hello"),
     DrawVertexsWidget(),
     ma.Text("Render"),
-    DrawRectWidget(),
   ],);
-}
-
-
-//
-// Rect
-//
-class DrawRectWidget extends sky.SingleChildRenderObjectWidget {
-  sky.RenderObject createRenderObject(sky.BuildContext context){
-    return new DrawRectObject();
-  }
-}
-
-class DrawRectObject extends sky.RenderBox {
-
-  @override
-  bool hitTestSelf(sky.Offset position) => true;
-
-  @override
-  void performLayout() {
-    // print(">>${ui.window.devicePixelRatio}");
-    this.size = sky.Size(50,50);
-//        50.0/sky.window.devicePixelRatio,50.0/sky.window.devicePixelRatio);
-  }
-
-  @override
-  void handleEvent(sky.PointerEvent event, sky.BoxHitTestEntry entry) {}
-
-  void paint(sky.PaintingContext context, sky.Offset offset) {
-    //this.size = sky.Size(10,10);
-    print("${offset} ${this.size}");
-    sky.Paint p = new sky.Paint();
-    context.canvas.transform(vec.Matrix4.translation(vec.Vector3(offset.dx,offset.dy, 1.0)).storage);
-    p.color = new sky.Color.fromARGB(0xff, 0x55, 0x55, 0x55);
-    sky.Rect r = new sky.Rect.fromLTWH(0.0, 0.0, 50.0, 50.0);
-    context.canvas.drawRect(r, p);
-    context.canvas.transform(vec.Matrix4.translation(vec.Vector3(-offset.dx,-offset.dy, 1.0)).storage);
-  }
 }
 
 
@@ -151,7 +112,7 @@ class DrawVertexsObject extends sky.RenderBox {
       return;
     }
 
-    context.canvas.translate(offset.dx, offset.dy);
+    context.canvas.translate(offset.dx+25, offset.dy+25);
     vec.Matrix4 mat = new vec.Matrix4.identity();
     mat.rotateY(math.pi / 2.0 + angle);
     mat.rotateX(angle);
@@ -166,7 +127,7 @@ class DrawVertexsObject extends sky.RenderBox {
     drawSurface(context, offset, mat);
     mat.rotateX(math.pi / 1.0);
     drawSurface(context, offset, mat);
-    context.canvas.translate(-offset.dx, -offset.dy);
+    context.canvas.translate(-offset.dx-25, -offset.dy-25);
 
   }
 
