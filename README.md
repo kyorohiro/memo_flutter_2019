@@ -2,7 +2,7 @@
 
 Update https://github.com/kyorohiro/memo_flutter
 
-![エビフライトライアングル](demo.gif "サンプル")
+![SampleImage](demo.gif "Sample")
 
 # License
 ## Aclonica.ttf
